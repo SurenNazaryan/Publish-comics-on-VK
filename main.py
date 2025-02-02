@@ -5,7 +5,7 @@ from telegram import Bot
 import random
 
 
-def get_random_number():
+def get_random_comic_number():
     last_comic_json_url = 'https://xkcd.com/info.0.json'
     response = requests.get(last_comic_json_url)
     response.raise_for_status()
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     load_dotenv()
     telegram_channel_id = os.environ['TELEGRAM_CHANNEL_ID']
     telegram_bot_token = os.environ['TELEGRAM_BOT_TOKEN']
-    random_number = get_random_number()
+    random_number = get_random_comic_number()
     comment, file_name = fetch_comic_comment_filename(random_number)
     publish_comic(telegram_channel_id, telegram_bot_token, file_name, comment)
     os.remove(file_name)
