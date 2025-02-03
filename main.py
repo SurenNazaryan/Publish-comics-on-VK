@@ -52,6 +52,10 @@ if __name__ == '__main__':
     telegram_bot_token = os.environ['TELEGRAM_BOT_TOKEN']
     random_number = get_random_comic_number()
     comment, file_name = fetch_comic_comment_filename(random_number)
-    publish_comic(telegram_channel_id, telegram_bot_token, file_name, comment)
-    os.remove(file_name)
-    
+    try:
+        publish_comic(telegram_channel_id, telegram_bot_token, file_name, comment)
+    except Exception:
+        print('Картинка в ТГ не отправилась')
+    finally:
+        os.remove(file_name)
+
